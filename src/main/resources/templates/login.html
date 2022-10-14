@@ -1,0 +1,40 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      >
+<head>
+  <meta charset="UTF-8"/>
+  <link rel="stylesheet" href="/static/layui/css/layui.css">
+
+  <title>登录</title>
+</head>
+
+<body>
+<div class="layui-container" style="width: 500px">
+  <h2 style="text-align: center;margin-top: 100px">用户登录</h2>
+  <form class="layui-form" action="/auth/login" method="post" style="margin-top: 15px">
+    <div th:if="${error}" th:text="${error}" style="background-color: #FF5722;color: white;text-align: center;font-size: 1.2em"></div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">用户名</label>
+      <div class="layui-input-block">
+        <input type="text" name="name" required lay-verify="required" placeholder="请输用户名" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">密码</label>
+      <div class="layui-input-block">
+        <input type="password" name="password" required lay-verify="required" placeholder="请输密码" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <button class="layui-btn" lay-submit lay-filter="formDemo">登录</button>
+        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+      </div>
+    </div>
+  </form>
+
+  <a th:if="${isDev}"
+     href="/auth/autologin" class="layui-btn layui-btn-danger">自动登录</a>
+</div>
+</body>
+</html>

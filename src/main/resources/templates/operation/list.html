@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="~{/layout/main}">
+<head>
+    <meta charset="UTF-8"/>
+    <title>操作日志列表</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <span class="layui-breadcrumb">
+      <a href="/">首页</a>
+        <a href="/operation/list"><cite>操作日志列表</cite></a>
+    </span>
+
+    <table class="layui-table" id="oplist">
+    </table>
+    <script src="/static/oplist.js" />
+</div>
+
+</body>
+</html>

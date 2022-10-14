@@ -1,0 +1,67 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="~{/layout/main}">
+<head>
+    <meta charset="UTF-8"/>
+    <title>主机列表</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <span class="layui-breadcrumb">
+      <a href="/">首页</a>
+        <a href="/host/list"><cite>主机列表</cite></a>
+    </span>
+
+    <div class="layui-btn-container" style="margin-top: 15px">
+        <a href="/host/save" class="layui-btn">新建主机</a>
+    </div>
+
+    <table class="layui-table">
+        <colgroup>
+            <col width="100">
+            <col width="200">
+            <col width="100">
+            <col>
+        </colgroup>
+        <thead>
+            <tr>
+                <th>主机名</th>
+                <th>主机IP</th>
+                <th>用户名</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="host : ${allHosts}">
+                <td th:text="${host.id}"></td>
+                <td th:text="${host.hostName}"></td>
+                <td th:text="${host.ip}"></td>
+                <td>
+                    <div class="layui-btn-group">
+                        <a th:href="@{'/host/save?id=' + ${host.id}}" class="layui-btn layui-btn-primary layui-btn-sm">
+                            <i class="layui-icon">&#xe642;</i>
+                        </a>
+                        <a th:href="@{'/host/del?id=' + ${host.id}}" class="layui-btn layui-btn-danger layui-btn-sm"
+                           onclick="warnDelete()"
+                        >
+                            <i class="layui-icon">&#xe640;</i>
+                        </a>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        function warnDelete() {
+            layer.alert('有了回调', function(index){
+                layer.close(index);
+            });
+        }
+    </script>
+</div>
+
+</body>
+</html>

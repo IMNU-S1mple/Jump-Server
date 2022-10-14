@@ -1,0 +1,69 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="~{/layout/main}">
+<head>
+    <meta charset="UTF-8"/>
+    <title>用户列表</title>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <span class="layui-breadcrumb">
+      <a href="/">首页</a>
+        <a href="/user/list"><cite>用户列表</cite></a>
+    </span>
+
+    <div class="layui-btn-container" style="margin-top: 15px">
+        <a href="/user/save" class="layui-btn">新建用户</a>
+    </div>
+
+    <table class="layui-table">
+        <colgroup>
+            <col width="100">
+            <col width="200">
+            <col width="100">
+            <col>
+        </colgroup>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>用户名</th>
+                <th>角色</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${allUsers}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.role.name}"></td>
+                <td>
+                    <div class="layui-btn-group">
+                        <a th:href="@{'/user/save?id=' + ${user.id}}" class="layui-btn layui-btn-primary layui-btn-sm">
+                            <i class="layui-icon">&#xe642;</i>
+                        </a>
+                        <a th:href="@{'/user/del?id=' + ${user.id}}" class="layui-btn layui-btn-danger layui-btn-sm"
+                           onclick="warnDelete()"
+                        >
+                            <i class="layui-icon">&#xe640;</i>
+                        </a>
+                        <a th:href="@{'/user/resetPassword?id=' + ${user.id}}" class="layui-btn layui-btn-primary layui-btn-sm">
+                            重置密码
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        function warnDelete() {
+            layer.alert('有了回调', function(index){
+                layer.close(index);
+            });
+        }
+    </script>
+</div>
+
+</body>
+</html>

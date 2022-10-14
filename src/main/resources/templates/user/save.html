@@ -1,0 +1,46 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="~{/layout/main}">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <span class="layui-breadcrumb">
+          <a href="/">首页</a>
+          <a href="/user/list">用户列表</a>
+          <a th:if="${user.id}" href="/user/save"><cite>更新用户</cite></a>
+          <a th:unless="${user.id}" href="/user/save"><cite>新建用户</cite></a>
+        </span>
+        <form class="layui-form" action="/user/save" method="post" style="margin-top: 15px">
+            <input th:if="${user.id}" type="hidden" name="id" th:value="${user.id}">
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-block">
+                    <input th:value="${user.name}" type="text" name="name" required  lay-verify="required" placeholder="请输用户名" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">用户角色</label>
+                <div class="layui-input-block">
+                    <select name="roleId" lay-verify="required">
+                        <option value=""></option>
+                        <option value="1">管理员</option>
+                        <option value="2">普通用户</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</body>
+</html>

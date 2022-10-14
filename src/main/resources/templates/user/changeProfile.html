@@ -1,0 +1,57 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="~{/layout/main}">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+
+<body>
+    <div layout:fragment="content">
+        <span class="layui-breadcrumb">
+          <a href="/">首页</a>
+          <a href="/user/changeProfile"><cite>修改本人信息</cite></a>
+
+        </span>
+        <form class="layui-form" action="/user/changeProfile" method="post" style="margin-top: 15px"
+              enctype="multipart/form-data">
+            <div class="layui-form-item">
+                <label class="layui-form-label">全名</label>
+                <div class="layui-input-block">
+                    <input th:value="${user.fullName}" type="text" name="fullName" placeholder="请输全名" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">邮箱</label>
+                <div class="layui-input-block">
+                    <input th:value="${user.email}" type="text" name="email" placeholder="请输邮箱" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">性别</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="gender" value="false" title="男" th:checked="${!user.gender}">
+                    <input type="radio" name="gender" value="true" title="女" th:checked="${user.gender}">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">头像</label>
+                <div class="layui-input-block">
+                    <input type="file" name="avatarFile" placeholder="请选择头像" autocomplete="off" class="layui-input">
+                </div>
+                <img src="/user/avatar.png">
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</body>
+</html>
